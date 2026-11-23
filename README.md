@@ -86,7 +86,7 @@ Claude Code: `claude mcp add --transport http agentgateway https://YOUR-DOMAIN/m
 
 ## Resources
 
-The gateway is a Rust binary. In our tests it used about 20 MB of RAM idle and peaked at 45 MB under 200 concurrent LLM requests with a 512 MB limit, so it fits Railway's smallest plan easily. If it ever stops unexpectedly, it exits non-zero and Railway restarts it.
+The gateway is a Rust binary. On Railway with a 0.5 GB / 1 vCPU limit it used about 20–25 MB of memory idle and peaked at 36 MB while serving 400 LLM requests (50 at a time) plus real MCP tool calls, with no OOM kill. It fits Railway's smallest plan easily. If it ever stops unexpectedly it exits non-zero (a killed process exits 137), so Railway's on-failure restart brings it back.
 
 ## Updates
 
